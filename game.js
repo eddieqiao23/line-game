@@ -23,6 +23,7 @@ context = canvas.getContext("2d");
 
 // Fire up the animation engine
 window.requestAnimationFrame(drawAll);
+window.requestAnimationFrame(drawScore);
 
 // Lines
 // var lines = [[0, 0, 0, 0], [canvas.width, canvas.height, canvas.width, canvas.height]];
@@ -78,7 +79,6 @@ function mouseMoved (event) {
   circlePos[1] = event.y;
 }
 
-
 var foodX;
 var foodY;
 
@@ -131,6 +131,7 @@ function wallCollision() {
 }
 
 function lineCircleInt() {
+  // return false;
   for (var i = 0; i < lines.length; i++) {
     // Check for intersection between lines[i] and circle
     var u = [lines[i][2] - lines[i][0], -lines[i][3] + lines[i][1]];
@@ -255,4 +256,14 @@ function drawAll() {
 
   // Loop the animation to the next frame.
   window.requestAnimationFrame(drawAll);
+}
+
+function drawScore() {
+  context.beginPath();
+  context.stroke();
+  context.strokeStyle = "black";
+  context.font = "30px Arial";
+  context.fillText("Score: " + score, 50, 50);
+
+  window.requestAnimationFrame(drawScore);
 }
