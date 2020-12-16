@@ -42,10 +42,12 @@ function drawAll() {
   }
   if (endScreen) {
     context.clearRect(0, 0, canvas.width, canvas.height);
+    highScore = Math.max(highScore, finalScore);
     // Draws score in the center
     context.textAlign = "center";
     drawText(canvas.width / 2, canvas.height / 2, "Score: " + finalScore);
-    drawText(canvas.width / 2, canvas.height / 2 + 50, "Press anywhere to play again.");
+    drawText(canvas.width / 2, canvas.height / 2 + 50, "High Score: " + highScore);
+    drawText(canvas.width / 2, canvas.height / 2 + 100, "Click anywhere to play again.");
     context.textAlign = "left";
     init();
   }
@@ -65,6 +67,7 @@ context = setUpContext();
 
 // Initializes everything
 var score = 0;
+var highScore = 0;
 var finalScore = 0;
 var hasHelp = false;
 var endScreen = false;

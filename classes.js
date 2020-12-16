@@ -258,8 +258,8 @@ function setUpContext() {
 
   canvas = document.getElementById("mainCanvas");
 
-  canvas.width = window.innerWidth - 30;
-  canvas.height = window.innerHeight - 30;
+  canvas.width = window.innerWidth - 22;
+  canvas.height = window.innerHeight - 22;
   canvas.style.border = "1px solid black";
 
   // Set up the context for the animation
