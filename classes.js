@@ -241,6 +241,14 @@ function drawText(x, y, message) {
   context.fillText(message, x, y);
 }
 
+function init () {
+  score = 0;
+  hasHelp = false;
+  lines = [];
+  player = new Circle(canvas.width / 2, canvas.height / 2, 20, "#ff0000", context);
+  food = new Circle(Math.random() * canvas.width, Math.random() * canvas.height, 5, "#008000", context);
+}
+
 function setUpContext() {
   // Sets up the context to get ready for the animation
   // Parameters: None

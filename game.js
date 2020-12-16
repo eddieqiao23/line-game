@@ -12,6 +12,7 @@ function drawAll() {
   for (var i = 0; i < lines.length; i++) {
     lines[i].draw();
     if (intCL(player, lines[i])) {
+      finalScore = score;
       endScreen = true;
     }
   }
@@ -26,7 +27,7 @@ function drawAll() {
   // Draws the player, the food, and the score
   player.draw();
   food.draw();
-  drawText(canvas.width / 40, canvas.height / 20, "Score: " + score);
+  drawText(canvas.width / 40, canvas.height / 15, "Score: " + score);
 
   if (hasHelp && score == 0) {
     context.textAlign = "center";
@@ -37,15 +38,16 @@ function drawAll() {
     context.textAlign = "left";
   }
   if (score == 0) {
-    drawText(canvas.width / 40, canvas.height / 8, "Press \"h\" for help");
+    drawText(canvas.width / 40, canvas.height / 7, "Press \"h\" for help");
   }
   if (endScreen) {
     context.clearRect(0, 0, canvas.width, canvas.height);
     // Draws score in the center
     context.textAlign = "center";
-    drawText(canvas.width / 2, canvas.height / 2, "Score: " + score);
+    drawText(canvas.width / 2, canvas.height / 2, "Score: " + finalScore);
     drawText(canvas.width / 2, canvas.height / 2 + 50, "Press anywhere to play again.");
     context.textAlign = "left";
+    init();
   }
 
   // Whenever the mouse moves, we update the location of the player
@@ -53,7 +55,7 @@ function drawAll() {
   document.addEventListener("keydown", keyPressed);
   document.addEventListener("mousedown", mouseClick);
 
-  console.log(endScreen);
+  console.log(score);
   // Loop the animation to the next frame.
   window.requestAnimationFrame(drawAll);
 }
@@ -61,23 +63,14 @@ function drawAll() {
 // Set up the canvas and context objects
 context = setUpContext();
 
-var playing = true;
+// Initializes everything
 var score = 0;
+var finalScore = 0;
 var hasHelp = false;
 var endScreen = false;
 var lines = [];
+player = new Circle(canvas.width / 2, canvas.height / 2, 20, "#ff0000", context);
+food = new Circle(Math.random() * canvas.width, Math.random() * canvas.height, 5, "#008000", context);
 
-while (playing) {
-	// Initializes everything
-	score = 0;
-	hasHelp = false;
-  endScreen = false;
-	lines = [];
-	player = new Circle(canvas.width / 2, canvas.height / 2, 20, "#ff0000", context);
-	food = new Circle(Math.random() * canvas.width, Math.random() * canvas.height, 5, "#008000", context);
-
-	// Fire up the animation engine
-	window.requestAnimationFrame(drawAll);
-
-  break;
-}
+// Fire up the animation engine
+window.requestAnimationFrame(drawAll);
