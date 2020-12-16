@@ -213,7 +213,7 @@ function addFood() {
 
   var x = Math.random() * canvas.width;
   var y = Math.random() * canvas.height;
-  while ((canvas.width / 5 < x && canvas.width * 4 / 5 < x) || (canvas.height / 5 < y && y < canvas.height * 4 / 5 )) {
+  while ((canvas.width / 5 < x && x < canvas.width * 4 / 5) || (canvas.height / 5 < y && y < canvas.height * 4 / 5 )) {
     var x = Math.random() * canvas.width;
     var y = Math.random() * canvas.height;
   }
