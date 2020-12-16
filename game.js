@@ -43,6 +43,7 @@ function drawAll() {
   if (endScreen) {
     context.clearRect(0, 0, canvas.width, canvas.height);
     highScore = Math.max(highScore, finalScore);
+    localStorage.setItem("highScore", highScore);
     // Draws score in the center
     context.textAlign = "center";
     drawText(canvas.width / 2, canvas.height / 2, "Score: " + finalScore);
@@ -67,7 +68,7 @@ context = setUpContext();
 
 // Initializes everything
 var score = 0;
-var highScore = 0;
+var highScore = localStorage.getItem("highScore");
 var finalScore = 0;
 var hasHelp = false;
 var endScreen = false;
