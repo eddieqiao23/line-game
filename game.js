@@ -12,10 +12,7 @@ function drawAll() {
   for (var i = 0; i < lines.length; i++) {
     lines[i].draw();
     if (intCL(player, lines[i])) {
-      context.clearRect(0, 0, canvas.width, canvas.height);
-      // Draws score in the center
-      drawText(canvas.width / 2, canvas.height / 2, "Score: " + score);
-      return;
+      endScreen = true;
     }
   }
 
@@ -42,11 +39,21 @@ function drawAll() {
   if (score == 0) {
     drawText(canvas.width / 40, canvas.height / 8, "Press \"h\" for help");
   }
+  if (endScreen) {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    // Draws score in the center
+    context.textAlign = "center";
+    drawText(canvas.width / 2, canvas.height / 2, "Score: " + score);
+    drawText(canvas.width / 2, canvas.height / 2 + 50, "Press anywhere to play again.");
+    context.textAlign = "left";
+  }
 
   // Whenever the mouse moves, we update the location of the player
   document.addEventListener("mousemove", mouseMoved);
   document.addEventListener("keydown", keyPressed);
+  document.addEventListener("mousedown", mouseClick);
 
+  console.log(endScreen);
   // Loop the animation to the next frame.
   window.requestAnimationFrame(drawAll);
 }
@@ -54,13 +61,23 @@ function drawAll() {
 // Set up the canvas and context objects
 context = setUpContext();
 
-// Initializes score
+var playing = true;
 var score = 0;
 var hasHelp = false;
-lines = [];
-player = new Circle(canvas.width / 2, canvas.height / 2, 20, "#ff0000", context);
-food = new Circle(Math.random() * canvas.width, Math.random() * canvas.height, 5, "#008000", context);
+var endScreen = false;
+var lines = [];
 
+while (playing) {
+	// Initializes everything
+	score = 0;
+	hasHelp = false;
+  endScreen = false;
+	lines = [];
+	player = new Circle(canvas.width / 2, canvas.height / 2, 20, "#ff0000", context);
+	food = new Circle(Math.random() * canvas.width, Math.random() * canvas.height, 5, "#008000", context);
 
-// Fire up the animation engine
-window.requestAnimationFrame(drawAll);
+	// Fire up the animation engine
+	window.requestAnimationFrame(drawAll);
+
+  break;
+}

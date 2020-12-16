@@ -180,6 +180,12 @@ function keyPressed (event) {
   }
 }
 
+function mouseClick (event) {
+  if (endScreen) {
+    endScreen = false;
+  }
+}
+
 function addLine() {
   // Adds a new line to the list of lines
   // Parameters: None, but it uses global variables
@@ -221,6 +227,9 @@ function addFood() {
 }
 
 function drawText(x, y, message) {
+  if (x == canvas.width / 2) {
+    console.log("eeeeeeee");
+  }
   // Draws some text (score or help) at a certain position x, y
   // Parameters: Integers x, y that reprsent the coordinates
   // Returns: Nothing but it modifies the display
