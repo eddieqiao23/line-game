@@ -13,8 +13,8 @@ class Line {
   constructor(x1, y1, x2, y2) {
     this.pt1 = [x1, y1];
     this.pt2 = [x2, y2];
-    this.vel1 = [(Math.random() - 0.5) * 4, (Math.random() - 0.5) * 4];
-    this.vel2 = [(Math.random() - 0.5) * 4, (Math.random() - 0.5) * 4];
+    this.vel1 = [(Math.random() - 0.5) * canvas.width / 250, (Math.random() - 0.5) * canvas.height / 250];
+    this.vel2 = [(Math.random() - 0.5) * canvas.width / 250, (Math.random() - 0.5) * canvas.height / 250];
     this.color = "#000000";
     this.width = 3;
     this.cap = 'round';
@@ -178,6 +178,11 @@ function keyPressed (event) {
     // If the key is 'h', go from false to true or true to false
     hasHelp = !hasHelp;
   }
+  if (event.keyCode == 82 && endScreen) {
+    // If the key is 'r' and it is showing the end screen, clear high score
+    localStorage.setItem("highScore", 0);
+    highScore = 0;
+  }
 }
 
 function mouseClick (event) {
@@ -219,17 +224,16 @@ function addFood() {
 
   var x = Math.random() * canvas.width;
   var y = Math.random() * canvas.height;
-  while ((canvas.width / 5 < x && x < canvas.width * 4 / 5) || (canvas.height / 5 < y && y < canvas.height * 4 / 5 )) {
-    var x = Math.random() * canvas.width;
-    var y = Math.random() * canvas.height;
+  // Food in the middle is almost impossible at a high score
+  while ((canvas.width / 5 < x && x < canvas.width * 4 / 5) &&  (canvas.height / 5 < y && y < canvas.height * 4 / 5)) {
+    x = Math.random() * canvas.width;
+    y = Math.random() * canvas.height;
   }
+
   food = new Circle(x, y, 5, "#008000", context);
 }
 
 function drawText(x, y, message) {
-  if (x == canvas.width / 2) {
-    console.log("eeeeeeee");
-  }
   // Draws some text (score or help) at a certain position x, y
   // Parameters: Integers x, y that reprsent the coordinates
   // Returns: Nothing but it modifies the display
