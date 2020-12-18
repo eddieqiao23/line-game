@@ -13,8 +13,8 @@ class Line {
   constructor(x1, y1, x2, y2) {
     this.pt1 = [x1, y1];
     this.pt2 = [x2, y2];
-    this.vel1 = [(Math.random() - 0.5) * 4, (Math.random() - 0.5) * 4];
-    this.vel2 = [(Math.random() - 0.5) * 4, (Math.random() - 0.5) * 4];
+    this.vel1 = [(Math.random() - 0.5) * 15, (Math.random() - 0.5) * 15];
+    this.vel2 = [(Math.random() - 0.5) * 15, (Math.random() - 0.5) * 15];
     this.color = "#000000";
     this.width = 3;
     this.cap = 'round';
@@ -219,10 +219,12 @@ function addFood() {
 
   var x = Math.random() * canvas.width;
   var y = Math.random() * canvas.height;
+  // Food in the middle is almost impossible at a high score
   while ((canvas.width / 5 < x && x < canvas.width * 4 / 5) || (canvas.height / 5 < y && y < canvas.height * 4 / 5 )) {
     var x = Math.random() * canvas.width;
     var y = Math.random() * canvas.height;
   }
+
   food = new Circle(x, y, 5, "#008000", context);
 }
 

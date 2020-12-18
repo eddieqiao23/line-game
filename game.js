@@ -76,5 +76,9 @@ var lines = [];
 player = new Circle(canvas.width / 2, canvas.height / 2, 20, "#ff0000", context);
 food = new Circle(Math.random() * canvas.width, Math.random() * canvas.height, 5, "#008000", context);
 
+// Just in case it hasn't been stored yet
+if (highScore === null) {
+  highScore = 0;
+}
 // Fire up the animation engine
 window.requestAnimationFrame(drawAll);
