@@ -225,7 +225,7 @@ function addFood() {
   var x = Math.random() * canvas.width;
   var y = Math.random() * canvas.height;
   // Food in the middle is almost impossible at a high score
-  while ((canvas.width / 5 < x && x < canvas.width * 4 / 5) &&  (canvas.height / 5 < y && y < canvas.height * 4 / 5)) {
+  while ((canvas.width / 5 < x && x < canvas.width * 4 / 5) && (canvas.height / 5 < y && y < canvas.height * 4 / 5)) {
     x = Math.random() * canvas.width;
     y = Math.random() * canvas.height;
   }
